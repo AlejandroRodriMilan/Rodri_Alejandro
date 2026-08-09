@@ -1,10 +1,9 @@
-import pygame,sys
-from tablero import Tablero
+import pygame,sys, tablero.py
+
 pygame.init()
 screen = pygame.display.set_mode((800,400))
 clock = pygame.time.Clock()
 running = True
-tablero = Tablero()
 
 while running:
     for event in pygame.event.get():
@@ -12,7 +11,7 @@ while running:
             running = False
 
     tablero = tablero_init()
-    tablero.draw(screen)
+    draw(tablero, screen)
     clock.tick(60)
 pygame.quit()
 sys.exit()
