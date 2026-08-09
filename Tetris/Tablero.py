@@ -5,7 +5,7 @@ def init():
     for i in range(20):
         fila = []
         for j in range(10):
-            file.append("black")
+            fila.append("black")
         tablero.append(fila)
     return tablero
 
