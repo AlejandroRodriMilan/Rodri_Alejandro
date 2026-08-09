@@ -154,6 +154,31 @@ class Piezas:
             for fila in zip(*matriz[::-1])
         ]
 
+    def der_posible(self,tablero):
+        pos = self.pos
+        for i in range(len(self.forma)):
+            for j in range(len(self.forma[0])):
+                if self.forma[i][j] == 1:
+                    tablero[pos[0]+i][pos[1]+j] == "black"
+
+        for i in range(len(self.forma)):
+            for j in range(len(self.forma[0])):
+                if self.forma[i][j] == 1:
+
+                    fila = pos[0]+i
+                    columna = pos[1]+j+1
+
+                    if columna >=
+
+    def izq_posible(self,tablero):
+        ...
+
+    def derecha(self,tablero):
+        ...
+
+    def izquierda(self,tablero):
+        ...
+
 
 
                         
