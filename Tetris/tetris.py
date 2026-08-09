@@ -1,7 +1,7 @@
 import pygame,sys,Tablero
 
 pygame.init()
-screen = pygame.display.set_mode((800,400))
+screen = pygame.display.set_mode((400,800))
 clock = pygame.time.Clock()
 running = True
 
