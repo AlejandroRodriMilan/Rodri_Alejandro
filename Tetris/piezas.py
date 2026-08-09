@@ -80,8 +80,17 @@ class Piezas:
                     tablero[self.pos[0] + i][self.pos[1] + j] = self.color
 
     def caida(self, tablero):
-        if self.cai_posible(tablero):
-            self.pos[0] += 1
+        for i in range(len(self.forma)):
+            for j in range(len(self.forma[0])):
+                if self.forma[i][j] == 1:
+                    tablero[self.pos[0] + i][self.pos[1] + j] = "black"
+
+        self.pos[0] += 1
+
+        for i in range(len(self.forma)):
+            for j in range(len(self.forma[0])):
+                if self.forma[i][j] == 1:
+                    tablero[self.pos[0] + i][self.pos[1] + j] = self.color
 
     def rot_posible(self, tablero):
         forma = self.rotar_derecha(self.forma)

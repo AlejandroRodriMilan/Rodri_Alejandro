@@ -24,17 +24,21 @@ while running:
     
     if pieza_nueva:
         pieza = Piezas()
-        pieza.draw(tablero)
-        Tablero.draw(tablero,screen)
         pieza_nueva = False
 
 
     fcount += 1
+
     if fcount % 30 == 0:
-        pieza.caida(tablero)
+        if pieza.cai_posible(tablero):
+            pieza.caida(tablero)
+        else:
+            pieza_nueva = True
+    
     
     Tablero.draw(tablero, screen)
-    
+    pieza.draw(tablero)
+
     pygame.display.flip()
 
     clock.tick(60)
