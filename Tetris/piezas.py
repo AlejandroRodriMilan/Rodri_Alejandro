@@ -114,19 +114,38 @@ class Piezas:
 
 
     def cai_posible(self, tablero):
+
         for i in range(len(self.forma)):
             for j in range(len(self.forma[0])):
                 if self.forma[i][j] == 1:
+                    tablero[self.pos[0] + i][self.pos[1] + j] = "black"
+
+        posible = True
+
+        for i in range(len(self.forma)):
+            for j in range(len(self.forma[0])):
+                if self.forma[i][j] == 1:
+
                     fila = self.pos[0] + i + 1
                     columna = self.pos[1] + j
 
                     if fila >= len(tablero):
-                        return False
+                        posible = False
+                        break
 
                     if tablero[fila][columna] != "black":
-                        return False
+                        posible = False
+                        break
 
-        return True
+            if not posible:
+                break
+
+        for i in range(len(self.forma)):
+            for j in range(len(self.forma[0])):
+                if self.forma[i][j] == 1:
+                    tablero[self.pos[0] + i][self.pos[1] + j] = self.color
+
+        return posible
 
 
     def rotar_derecha(self, matriz):
