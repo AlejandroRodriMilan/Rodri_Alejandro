@@ -65,8 +65,8 @@ COLORES = {
 class Piezas:
     def __init__(self):
         self.tipo = self.crear_pieza()
-        self.forma = FORMAS[tipo]
-        self.color = COLORES[tipo]
+        self.forma = FORMAS[self.tipo]
+        self.color = COLORES[self.tipo]
         self.pos = [0,4]
 
     def crear_pieza(self):

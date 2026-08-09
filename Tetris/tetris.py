@@ -14,26 +14,23 @@ pygame.display.set_caption("Tetris")
 clock = pygame.time.Clock()
 fcount = 0
 tablero = Tablero.init()
-nueva_pieza = Piezas()
 
 running = True
+pieza_nueva = True
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+    
+    if pieza_nueva:
+        pieza = Piezas()
+        pieza = Tablero.draw(tablero,screen)
+        pieza_nueva = False
+
 
     fcount += 1
     if fcount % 30 == 0:
-        tablero = caída(tablero)
-    
-    
-    if nueva_pieza.cai_posible(tablero):
-        tablero = caída(tablero)
-    else:
-        nueva_pieza = crear_pieza()
-        nueva_pieza = draw(tablero)
-        nueva_pieza = Piezas()
-    
+        pieza.Piezas.caída(tablero)
     
     Tablero.draw(tablero, screen)
     
