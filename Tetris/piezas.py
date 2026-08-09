@@ -86,6 +86,7 @@ class Piezas:
                 if FORMAS[i-pos[0]][j-pos[0]] == 1:
                     tablero[i+1][j] = self.color
                     tablero[i][j] = "black"
+        return tablero
 
     def rot_posible(self,tablero):
         forma = self.rotar_derecha
