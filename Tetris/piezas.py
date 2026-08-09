@@ -70,44 +70,57 @@ class Piezas:
         self.pos = [0,4]
 
     def crear_pieza(self):
-        tipo = random_choice(list(FORMAS.keys()))
-        return Pieza(tipo)
+        tipo = random.choice(list(FORMAS.keys()))
+        return tipo
 
-    def draw(self,tablero):
-        for i in range(4):
-            for j in range(4,6):
-                if j==4 or j==5:
-                    if FORMAS[self.tipo][i][j-4] == 1:
-                        talero[i][j] = COLORES[self.tipo]
+    def draw(self, tablero):
+        for i in range(len(self.forma)):
+            for j in range(len(self.forma[0])):
+                if self.forma[i][j] == 1:
+                    tablero[self.pos[0] + i][self.pos[1] + j] = self.color
 
     def caída(self, tablero):
-        for i in range(self.pos[0], self.pos[0] + len(self.forma) + 1):
-            for j in range(self.pos[1], self.pos[1] + len(self.forma)):
-                if self.forma[i-pos[0]][j-pos[0]] == 1:
-                    tablero[i+1][j] = self.color
-                    if self.forma[i-pos[0]-1][j-pos[0]] == 0:
-                        tablero[i][j] = "black"
-        return tablero
+        if self.cai_posible(tablero):
+            self.pos[0] += 1
 
-    def rot_posible(self,tablero):
-        forma = self.rotar_derecha
-        pos = self.pos
-        for i in range(pos[0],pos[0]+len(forma)):
-            for j in range(pos[1],pos[1] + len(forma[0])):
-                if (forma[i-pos[0]][j-pos[1]] == 1 and tablero[i][j] != "black"): 
-                    return False
+    def rot_posible(self, tablero):
+        forma = self.rotar_derecha(self.forma)
+
+        for i in range(len(forma)):
+            for j in range(len(forma[0])):
+                if forma[i][j] == 1:
+                    fila = self.pos[0] + i
+                    columna = self.pos[1] + j
+
+                    if fila < 0 or fila >= len(tablero):
+                        return False
+
+                    if columna < 0 or columna >= len(tablero[0]):
+                        return False
+
+                    if tablero[fila][columna] != "black":
+                        return False
+
         return True
 
 
-    def cai_posible(self,tablero):
-        for i in range(self.pos[0], self.pos[0] + len(self.forma) + 1):
-            for j in range(self.pos[1], self.pos[1] + len(self.forma)):
-                if (self.forma[i-pos[0]][j-pos[0]] == 1 and tablero[i+1][j] != "black") or (i+1 > 20):
-                    return False
+    def cai_posible(self, tablero):
+        for i in range(len(self.forma)):
+            for j in range(len(self.forma[0])):
+                if self.forma[i][j] == 1:
+                    fila = self.pos[0] + i + 1
+                    columna = self.pos[1] + j
+
+                    if fila >= len(tablero):
+                        return False
+
+                    if tablero[fila][columna] != "black":
+                        return False
+
         return True
 
 
-    def rotar_derecha(matriz):
+    def rotar_derecha(self, matriz):
         return [
             list(fila)
             for fila in zip(*matriz[::-1])
