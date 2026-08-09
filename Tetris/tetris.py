@@ -18,9 +18,20 @@ tablero = Tablero.init()
 running = True
 pieza_nueva = True
 while running:
-    for event in pygame.event.get():
+        for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                if pieza.rot_posible(tablero):
+                    pieza.rotar(tablero)
+
+            if event.key == pygame.K_RIGHT:
+                pass
+
+            if event.key == pygame.K_LEFT:
+                pass
+
     
     if pieza_nueva:
         pieza = Piezas()
