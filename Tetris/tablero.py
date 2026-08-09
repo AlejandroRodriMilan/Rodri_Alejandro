@@ -2,9 +2,11 @@ import pygame
 
 def init():
     tablero = []
-    for fila in range(20):
-        for columna in range(10):
-            tablero[fila][columna] = "black"
+    for i in range(20):
+        fila = []
+        for j in range(10):
+            file.append("black")
+        tablero.append(fila)
     return tablero
 
 
