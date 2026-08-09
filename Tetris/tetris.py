@@ -24,13 +24,14 @@ while running:
     
     if pieza_nueva:
         pieza = Piezas()
-        pieza = Tablero.draw(tablero,screen)
+        pieza.draw(tablero)
+        Tablero.draw(tablero,screen)
         pieza_nueva = False
 
 
     fcount += 1
     if fcount % 30 == 0:
-        pieza.Piezas.caída(tablero)
+        pieza.caida(tablero)
     
     Tablero.draw(tablero, screen)
     
