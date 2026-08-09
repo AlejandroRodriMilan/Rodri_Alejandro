@@ -24,7 +24,7 @@ while running:
 
     fcount += 1
     if fcount % 30 == 0:
-        #caida pieza
+        tablero = caída(tablero)
     
     
     if nueva_pieza.cai_posible(tablero):
