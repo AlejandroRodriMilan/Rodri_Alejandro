@@ -8,6 +8,8 @@ pygame.init()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+
+        tablero.draw(screen)
         
         game(screen, clock)
         clock.tick(60)

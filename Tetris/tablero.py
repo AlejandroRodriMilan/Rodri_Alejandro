@@ -12,7 +12,10 @@ class Tablero:
     def update ()
 
     def draw(self, screen):
-        for i in range(20):
-            for j in range(10):
-                pygame.draw.rect(screen,self.tablero[i][j], 40*i, 40*j, 40, 40)
+        for fila in range(self.filas):
+            for columna in range(self.columnas):
+                x = columnas*40
+                y = fila*40
+                cuadrado = pygame.Rect(x, y, 40, 40)
+                pygame.draw.rect(screen,self.tablero[fila][columna], cuadrado)
 
