@@ -1,2 +1,0 @@
-def game(screen, clock):
-    
