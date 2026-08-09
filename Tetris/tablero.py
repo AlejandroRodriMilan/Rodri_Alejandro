@@ -1,6 +1,6 @@
 import pygame
 
-def tablero_init():
+def init():
     tablero = []
     for fila in range(20):
         for columna in range(10):
