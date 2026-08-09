@@ -64,7 +64,7 @@ COLORES = {
 
 class Piezas:
     def __init__(self):
-        self.tipo = crear_pieza
+        self.tipo = self.crear_pieza()
         self.forma = FORMAS[tipo]
         self.color = COLORES[tipo]
         self.pos = [0,4]
@@ -83,15 +83,28 @@ class Piezas:
     def caída(self, tablero):
         for i in range(self.pos[0], self.pos[0] + len(self.forma) + 1):
             for j in range(self.pos[1], self.pos[1] + len(self.forma)):
-                if FORMAS[i-pos[0]][j-pos[0]] == 1:
+                if self.forma[i-pos[0]][j-pos[0]] == 1:
                     tablero[i+1][j] = self.color
-                    tablero[i][j] = "black"
+                    if self.forma[i-pos[0]-1][j-pos[0]] == 0:
+                        tablero[i][j] = "black"
         return tablero
 
     def rot_posible(self,tablero):
         forma = self.rotar_derecha
+        pos = self.pos
         for i in range(pos[0],pos[0]+len(forma)):
-            for j in range(len(forma[0])):
+            for j in range(pos[1],pos[1] + len(forma[0])):
+                if (forma[i-pos[0]][j-pos[1]] == 1 and tablero[i][j] != "black"): 
+                    return False
+        return True
+
+
+    def cai_posible(self,tablero):
+        for i in range(self.pos[0], self.pos[0] + len(self.forma) + 1):
+            for j in range(self.pos[1], self.pos[1] + len(self.forma)):
+                if (self.forma[i-pos[0]][j-pos[0]] == 1 and tablero[i+1][j] != "black") or (i+1 > 20):
+                    return False
+        return True
 
 
     def rotar_derecha(matriz):
