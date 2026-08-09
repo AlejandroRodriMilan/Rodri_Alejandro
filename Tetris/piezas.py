@@ -67,7 +67,7 @@ class Piezas:
         self.tipo = crear_pieza
         self.forma = FORMAS[tipo]
         self.color = COLORES[tipo]
-        self.pos = [4,0]
+        self.pos = [0,4]
 
     def crear_pieza(self):
         tipo = random_choice(list(FORMAS.keys()))
@@ -80,8 +80,12 @@ class Piezas:
                     if FORMAS[self.tipo][i][j-4] == 1:
                         talero[i][j] = COLORES[self.tipo]
 
-    def caída(self, tablero, pos):
-        ...
+    def caída(self, tablero):
+        for i in range(self.pos[0], self.pos[0] + len(self.forma) + 1):
+            for j in range(self.pos[1], self.pos[1] + len(self.forma)):
+                if FORMAS[i-pos[0]][j-pos[0]] == 1:
+                    tablero[i+1][j] = self.color
+                    tablero[i][j] = "black"
 
     def rot_posible(self,tablero):
         forma = self.rotar_derecha
