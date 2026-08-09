@@ -79,7 +79,7 @@ class Piezas:
                 if self.forma[i][j] == 1:
                     tablero[self.pos[0] + i][self.pos[1] + j] = self.color
 
-    def caída(self, tablero):
+    def caida(self, tablero):
         if self.cai_posible(tablero):
             self.pos[0] += 1
 
