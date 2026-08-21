@@ -18,3 +18,10 @@ def draw(tablero, screen):
             cuadrado = pygame.Rect(x, y, 40, 40)
             pygame.draw.rect(screen,tablero[fila][columna], cuadrado)
 
+def clear_line(tablero):
+    for i in range(20):
+        linea = True
+        for j in range(10):
+            if tablero[i][j] == 0: linea = False
+        if linea:
+            for j in range(10): tablero[i][j] = 0
