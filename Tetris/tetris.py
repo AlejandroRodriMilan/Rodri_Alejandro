@@ -18,10 +18,16 @@ possible_restart = False
 
 def game_over(screen):
     pygame.draw.rect(screen, "black", (0,0,400,800))
-    text = font.render("GAME OVER", True, "red")
+    game_over_text = font.render("GAME OVER", True, "red")
     text_rect = text.get_rect(center=(200, 400))
     screen.blit(text, text_rect)
     possible_restart = True
+
+    restart_text = small_font.render(
+            "Press R to restart",
+            True,
+            (255, 255, 255),
+         )
 
 
 running = True
@@ -32,8 +38,7 @@ while running:
             running = False
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
-                if pieza.rot_posible(tablero):
-                    pieza.rotar(tablero)
+                pieza.rotar(tablero)
 
             elif event.key == pygame.K_RIGHT and pieza.mover_posible(tablero, 0, 1):
                 pieza.mover(tablero, 0, 1)
