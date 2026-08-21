@@ -58,13 +58,7 @@ class Piezas:
 
     def caida(self, tablero):
         self.borrar(tablero)
-
         self.pos[0] += 1
-
-        for i in range(len(self.forma)):
-            for j in range(len(self.forma[0])):
-                if self.forma[i][j] == 1:
-                    tablero[self.pos[0] + i][self.pos[1] + j] = self.color
 
     def borrar(self, tablero):
         for i in range(len(self.forma)):
@@ -72,6 +66,23 @@ class Piezas:
                 if self.forma[i][j] == 1:
                     tablero[self.pos[0] + i][self.pos[1] + j] = "black"
 
+    def mover_posible(self, tablero, check_fila, check_columna):
+        self.borrar(tablero)
+        for i in range(len(self.forma)):
+            for j in range(len(self.forma[0])):
+                if self.forma[i][j] == 1:
+                    fila = self.pos[0] + i + check_fila
+                    columna = self.pos[1] + j + check_columna
+                    if fila >= len(tablero) or columna >= len(tablero[0]) or columna < 0 or tablero[fila][columna] != "black":
+                        return False
+        return True
+
+
+    def mover(self, tablero, cambio_fila, cambio_columna):
+        self.borrar(tablero)
+        self.pos[0] += cambio_fila
+        self.pos[1] += cambio_columna
+        
     def rot_posible(self, tablero):
         forma = self.rotar_derecha(self.forma)
 
@@ -92,40 +103,6 @@ class Piezas:
 
         return True
 
-    def cai_posible(self, tablero):
-
-        for i in range(len(self.forma)):
-            for j in range(len(self.forma[0])):
-                if self.forma[i][j] == 1:
-                    tablero[self.pos[0] + i][self.pos[1] + j] = "black"
-
-        posible = True
-
-        for i in range(len(self.forma)):
-            for j in range(len(self.forma[0])):
-                if self.forma[i][j] == 1:
-
-                    fila = self.pos[0] + i + 1
-                    columna = self.pos[1] + j
-
-                    if fila >= len(tablero):
-                        posible = False
-                        break
-
-                    if tablero[fila][columna] != "black":
-                        posible = False
-                        break
-
-            if not posible:
-                break
-
-        for i in range(len(self.forma)):
-            for j in range(len(self.forma[0])):
-                if self.forma[i][j] == 1:
-                    tablero[self.pos[0] + i][self.pos[1] + j] = self.color
-
-        return posible
-
     def rotar(self, tablero):
         self.borrar(tablero)
 
@@ -141,80 +118,3 @@ class Piezas:
             list(fila)
             for fila in zip(*matriz[::-1])
         ]
-
-    def der_posible(self, tablero):
-        pos = self.pos
-        for i in range(len(self.forma)):
-            for j in range(len(self.forma[0])):
-                if self.forma[i][j] == 1:
-                    tablero[pos[0] + i][pos[1] + j] == "black"
-
-        posible = True
-
-        for i in range(len(self.forma)):
-            for j in range(len(self.forma[0])):
-                if self.forma[i][j] == 1:
-
-                    fila = pos[0] + i
-                    columna = pos[1] + j + 1
-
-                    if columna >= len(tablero[0]) or tablero[fila][columna] != "black":
-                        posible = False
-                        break
-
-            if not posible: return False
-
-        for i in range(len(self.forma)):
-            for j in range(len(self.forma[0])):
-                if self.forma[i][j] == 1:
-                    tablero[pos[0 + 1]][pos[1] + j] == self.color
-        return True
-
-    def izq_posible(self, tablero):
-        pos = self.pos
-#        for i in range(len(self.forma)):
-#            for j in range(len(self.forma[0])):
-#               if self.forma[i][j] == 1:
-#                    tablero[pos[0] + i][pos[1] + j] == "black"
-
-        for i in range(len(self.forma)):
-            for j in range(len(self.forma[0])):
-                if self.forma[i][j] == 1:
-
-                    fila = pos[0] + i
-                    columna = pos[1] + j - 1
-
-                    if columna >= len(tablero[0]) or tablero[fila][columna] != "black":
-                        return False
-        return True
-    
-    def mov_posible(self, tablero):
-        for i in range(len(self.forma)):
-            for j in range(len(self.forma[0])):
-                if self.forma[i][j] == 1:
-
-                    fila = pos[0] + i
-                    columna = pos[1] + j - 1
-
-                    if columna >= len(tablero[0]) or tablero[fila][columna] != "black":
-                        return False
-        return True
-    
-    def derecha_posible(self):
-        
-
-
-    def mover(self, tablero, cambio_fila, cambio_columna):
-        self.borrar(tablero)
-        self.pos[0] += cambio_fila
-        self.pos[1] += cambio_columna
-        for i in range(len(self.forma)):
-            for j in range(len(self.forma[0])):
-                if self.forma[i][j] == 1:
-                    tablero[self.pos[0] + i][self.pos[1] + j] = self.color
-
-    def borrar(self, tablero):
-        for i in range(len(self.forma)):
-            for j in range(len(self.forma[0])):
-                if self.forma[i][j] == 1:
-                    tablero[self.pos[0] + i][self.pos[1] + j] = "black"

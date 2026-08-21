@@ -3,13 +3,10 @@ import sys
 import Tablero
 from piezas import Piezas
 
-
 pygame.init()
 
-
-screen = pygame.display.set_mode((400,800))
+screen = pygame.display.set_mode((400, 800))
 pygame.display.set_caption("Tetris")
-
 
 clock = pygame.time.Clock()
 fcount = 0
@@ -26,25 +23,24 @@ while running:
                 if pieza.rot_posible(tablero):
                     pieza.rotar(tablero)
 
-            elif event.key == pygame.K_RIGHT and pieza.der_posible(tablero):
-                pieza.mover(tablero, 1, 0)
-
-            elif event.key == pygame.K_LEFT and pieza.izq_posible(tablero):
-                pieza.mover(tablero, -1, 0)
-
-            elif event.key == pygame.K_DOWN and pieza.cai_posible():
+            elif event.key == pygame.K_RIGHT and pieza.mover_posible(tablero, 0, 1):
                 pieza.mover(tablero, 0, 1)
 
-    
+            elif event.key == pygame.K_LEFT and pieza.mover_posible(tablero, 0, -1):
+                pieza.mover(tablero, 0, -1)
+
+            elif event.key == pygame.K_DOWN and pieza.mover_posible(tablero, 1, 0):
+                pieza.mover(tablero, 1, 0)
+
+
     if pieza_nueva:
         pieza = Piezas()
         pieza_nueva = False
 
-
     fcount += 1
 
     if fcount % 30 == 0:
-        if pieza.cai_posible(tablero):
+        if pieza.mover_posible(tablero, 1, 0):
             pieza.caida(tablero)
         else:
             pieza_nueva = True
