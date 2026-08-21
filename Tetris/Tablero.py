@@ -19,9 +19,9 @@ def draw(tablero, screen):
             pygame.draw.rect(screen,tablero[fila][columna], cuadrado)
 
 def clear_line(tablero):
-    for i in range(20):
+    for i in range(len(tablero)):
         linea = True
-        for j in range(10): #check for line
+        for j in range(len(tablero[0])): #check for line
             if tablero[i][j] == 0: linea = False
 
         if linea: # line reset
