@@ -27,10 +27,13 @@ while running:
                     pieza.rotar(tablero)
 
             elif event.key == pygame.K_RIGHT and pieza.der_posible(tablero):
-                pieza.derecha(tablero)
+                pieza.mover(tablero, 1, 0)
 
             elif event.key == pygame.K_LEFT and pieza.izq_posible(tablero):
-                pieza.izquierda(tablero)
+                pieza.mover(tablero, -1, 0)
+
+            elif event.key == pygame.K_DOWN and pieza.cai_posible():
+                pieza.mover(tablero, 0, 1)
 
     
     if pieza_nueva:
