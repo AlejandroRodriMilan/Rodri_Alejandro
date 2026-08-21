@@ -5,7 +5,7 @@ from piezas import Piezas
 
 pygame.init()
 
-pygame.mixer.music.load("tetris-gameboy.mp3")
+pygame.mixer.music.load("Tetris/tetris-gameboy.mp3")
 pygame.mixer.music.set_volume(0.5)
 pygame.mixer.music.play(-1)
 
