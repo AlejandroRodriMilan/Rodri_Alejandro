@@ -5,6 +5,10 @@ from piezas import Piezas
 
 pygame.init()
 
+pygame.mixer.music.load("tetris.mp3")
+pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.play(-1)
+
 screen = pygame.display.set_mode((400, 800))
 pygame.display.set_caption("Tetris")
 
