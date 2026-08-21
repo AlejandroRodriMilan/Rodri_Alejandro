@@ -8,7 +8,7 @@ pygame.init()
 screen = pygame.display.set_mode((400, 800))
 pygame.display.set_caption("Tetris")
 
-font = pygame.font.Font("PressStart2P-Regular.ttf", 48)
+font = pygame.font.SysFont("consolas", 48)
 small_font = pygame.font.Font(None, 36)
 
 clock = pygame.time.Clock()
@@ -43,7 +43,7 @@ while running:
 
             elif event.key == pygame.K_DOWN and pieza.mover_posible(tablero, 1, 0):
                 pieza.mover(tablero, 1, 0)
-            elif event.key == pygame.K_R and possible_restart:
+            elif event.key == pygame.K_r and possible_restart:
                 Tablero.reset(tablero)
 
 
