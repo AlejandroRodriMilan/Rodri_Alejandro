@@ -45,7 +45,8 @@ while running:
             pieza.caida(tablero)
         else:
             pieza_nueva = True
-    
+
+    tablero.clear_line(tablero)
     
     Tablero.draw(tablero, screen)
     pieza.draw(tablero)
