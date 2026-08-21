@@ -83,19 +83,24 @@ class Piezas:
         self.pos[0] += cambio_fila
         self.pos[1] += cambio_columna
         
-    def rot_posible(self, tablero):
-        forma = self.rotar_derecha(self.forma)
+    def rotar_posible(self, tablero):
+        forma_rotada = [
+            list(fila)
+            for fila in zip(*self.forma[::-1])
+        ]
 
-        for i in range(len(forma)):
-            for j in range(len(forma[0])):
-                if forma[i][j] == 1:
+        for i in range(len(forma_rotada)):
+            for j in range(len(forma_rotada[0])):
+                if forma_rotada[i][j] == 1:
                     fila = self.pos[0] + i
                     columna = self.pos[1] + j
 
-                    if fila < 0 or fila >= len(tablero):
-                        return False
-
-                    if columna < 0 or columna >= len(tablero[0]):
+                    if (
+                            fila < 0
+                            or fila >= len(tablero)
+                            or columna < 0
+                            or columna >= len(tablero[0])
+                    ):
                         return False
 
                     if tablero[fila][columna] != "black":
@@ -105,16 +110,8 @@ class Piezas:
 
     def rotar(self, tablero):
         self.borrar(tablero)
-
-        forma_rotada = self.rotar_derecha(self.forma)
-
-        if self.rot_posible(tablero):
-            self.forma = forma_rotada
-
-        self.draw(tablero)
-
-    def rotar_derecha(self, matriz):
-        return [
-            list(fila)
-            for fila in zip(*matriz[::-1])
-        ]
+        if self.rotar_posible(tablero):
+            self.forma = [
+                list(fila)
+                for fila in zip(*self.forma[::-1])
+            ]
