@@ -26,10 +26,10 @@ while running:
                 if pieza.rot_posible(tablero):
                     pieza.rotar(tablero)
 
-            if event.key == pygame.K_RIGHT:
+            elif event.key == pygame.K_RIGHT:
                 if pieza.der_posible(tablero): pieza.derecha(tablero)
 
-            if event.key == pygame.K_LEFT:
+            elif event.key == pygame.K_LEFT:
                 pass
 
     
