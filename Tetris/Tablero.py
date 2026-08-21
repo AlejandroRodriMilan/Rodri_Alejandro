@@ -17,6 +17,7 @@ def draw(tablero, screen):
             y = fila*40
             cuadrado = pygame.Rect(x, y, 40, 40)
             pygame.draw.rect(screen,tablero[fila][columna], cuadrado)
+            pygame.draw.rect(screen,tablero[fila][columna],cuadrado,color='grey')  
 
 def clear_line(tablero):
     for i in range(len(tablero)):
