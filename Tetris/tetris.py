@@ -42,11 +42,12 @@ while running:
     if fcount % 30 == 0:
         if pieza.mover_posible(tablero, 1, 0):
             pieza.caida(tablero)
+            Tablero.clear_line(tablero)
         else:
             pieza_nueva = True
-    
-    Tablero.draw(tablero, screen)
+
     pieza.draw(tablero)
+    Tablero.draw(tablero, screen)
 
     pygame.display.flip()
 

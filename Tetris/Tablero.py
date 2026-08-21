@@ -20,10 +20,7 @@ def draw(tablero, screen):
             pygame.draw.rect(screen,(30,30,30),cuadrado,1)  
 
 def clear_line(tablero):
-    for i in range(len(tablero)):
-        linea = True
-        for j in range(len(tablero[0])): #check for line
-            if tablero[i][j] == 0: linea = False
-
-        if linea: # line reset
-            for j in range(10): tablero[i][j] = 0
+    for i in range(len(tablero)-1,-1,-1):
+        if "black" not in tablero[i]:
+            tablero.pop(i)
+            tablero.insert(0,["black"] *10)
