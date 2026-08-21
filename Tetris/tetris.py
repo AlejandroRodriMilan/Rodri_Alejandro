@@ -44,7 +44,7 @@ while running:
             elif event.key == pygame.K_DOWN and pieza.mover_posible(tablero, 1, 0):
                 pieza.mover(tablero, 1, 0)
             elif event.key == pygame.K_R and possible_restart:
-                
+                Tablero.reset(tablero)
 
 
 
