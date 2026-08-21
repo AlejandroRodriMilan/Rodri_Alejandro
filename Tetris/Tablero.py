@@ -21,7 +21,8 @@ def draw(tablero, screen):
 def clear_line(tablero):
     for i in range(20):
         linea = True
-        for j in range(10):
+        for j in range(10): #check for line
             if tablero[i][j] == 0: linea = False
-        if linea:
+
+        if linea: # line reset
             for j in range(10): tablero[i][j] = 0
