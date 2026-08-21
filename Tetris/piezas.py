@@ -64,14 +64,11 @@ COLORES = {
 
 class Piezas:
     def __init__(self):
-        self.tipo = self.crear_pieza()
+        self.tipo = random.choice(list(FORMAS))
         self.forma = FORMAS[self.tipo]
         self.color = COLORES[self.tipo]
         self.pos = [0,4]
 
-    def crear_pieza(self):
-        tipo = random.choice(list(FORMAS.keys()))
-        return tipo
 
     def draw(self, tablero):
         for i in range(len(self.forma)):
