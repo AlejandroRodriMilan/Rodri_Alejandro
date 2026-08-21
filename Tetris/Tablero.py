@@ -24,3 +24,8 @@ def clear_line(tablero):
         if "black" not in tablero[i]:
             tablero.pop(i)
             tablero.insert(0,["black"] *10)
+
+def reset(tablero):
+    for i in range(len(tablero)):
+        for j in range(len(tablero[0])):
+            tablero[i][j] = "black"
