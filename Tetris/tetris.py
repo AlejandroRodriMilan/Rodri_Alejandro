@@ -8,9 +8,21 @@ pygame.init()
 screen = pygame.display.set_mode((400, 800))
 pygame.display.set_caption("Tetris")
 
+font = pygame.font.Font("PressStart2P-Regular.ttf", 48)
+small_font = pygame.font.Font(None, 36)
+
 clock = pygame.time.Clock()
 fcount = 0
 tablero = Tablero.init()
+possible_restart = False
+
+def game_over(screen):
+    pygame.draw.rect(screen, "black", (0,0,400,800))
+    text = font.render("GAME OVER", True, "red")
+    text_rect = text.get_rect(center=(200, 400))
+    screen.blit(text, text_rect)
+    possible_restart = True
+
 
 running = True
 pieza_nueva = True
@@ -31,6 +43,9 @@ while running:
 
             elif event.key == pygame.K_DOWN and pieza.mover_posible(tablero, 1, 0):
                 pieza.mover(tablero, 1, 0)
+            elif event.key == pygame.K_R and possible_restart:
+                
+
 
 
     if pieza_nueva:
@@ -40,11 +55,18 @@ while running:
     fcount += 1
 
     if fcount % 30 == 0:
+
+        
         if pieza.mover_posible(tablero, 1, 0):
             pieza.caida(tablero)
             Tablero.clear_line(tablero)
+            
         else:
-            pieza_nueva = True
+            if fcount == 0:
+                game_over()
+            else:
+                pieza_nueva = True
+                fcount = 0
 
     pieza.draw(tablero)
     Tablero.draw(tablero, screen)
