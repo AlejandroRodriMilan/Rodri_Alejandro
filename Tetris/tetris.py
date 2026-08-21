@@ -26,30 +26,16 @@ while running:
                 if pieza.rot_posible(tablero):
                     pieza.rotar(tablero)
 
-            elif event.key == pygame.K_RIGHT:
-                if pieza.der_posible(tablero): pieza.derecha(tablero)
+            elif event.key == pygame.K_RIGHT and pieza.der_posible(tablero):
+                pieza.derecha(tablero)
 
-            elif event.key == pygame.K_LEFT:
-                pass
+            elif event.key == pygame.K_LEFT and izq_posible(tablero):
+                izquierda
 
     
     if pieza_nueva:
         pieza = Piezas()
         pieza_nueva = False
-
-
-    for event in pygame.event.get():
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP:
-                if pieza.rot_posible(tablero):
-                    pieza.rotar(tablero)
-        
-            elif event.key == pygame.K_RIGHT:
-                print("pressed")
-                if pieza.der_posible(tablero): pieza.derecha(tablero)
-        
-            elif event.key == pygame.K_LEFT:
-                if pieza.izq_posible(tablero): pieza.izquierda(tablero)
 
 
     fcount += 1
