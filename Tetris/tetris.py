@@ -29,8 +29,8 @@ while running:
             elif event.key == pygame.K_RIGHT and pieza.der_posible(tablero):
                 pieza.derecha(tablero)
 
-            elif event.key == pygame.K_LEFT and izq_posible(tablero):
-                izquierda
+            elif event.key == pygame.K_LEFT and pieza.izq_posible(tablero):
+                pieza.izquierda(tablero)
 
     
     if pieza_nueva:
