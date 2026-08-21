@@ -1,74 +1,54 @@
 import pygame, random, Tablero
 
-
 FORMAS = {
     "I": [
-        [1, 0], 
-        [1, 0], 
-        [1, 0], 
-        [1, 0]
+        [1],
+        [1],
+        [1],
+        [1]
     ],
-
     "O": [
         [1, 1],
         [1, 1],
-        [0, 0],
-        [0, 0]
     ],
-
     "T": [
-        [1, 0],
-        [1, 1],
-        [1, 0],
-        [0, 0]
+        [0, 1, 0],
+        [1, 1, 1],
     ],
-
     "L": [
-        [1, 0],
-        [1, 0],
-        [1, 1],
-        [0, 0]
+        [0, 0, 1],
+        [1, 1, 1],
     ],
-
     "J": [
-        [0, 1],
-        [0, 1],
-        [1, 1],
-        [0, 0]
+        [1, 0, 0],
+        [1, 1, 1],
     ],
-
     "S": [
-        [1, 0],
-        [1, 1],
-        [0, 1],
-        [0, 0]
+        [0, 1, 1],
+        [1, 1, 0],
     ],
-
     "Z": [
-        [0, 1],
-        [1, 1],
-        [1, 0],
-        [0, 0]
-    ]
+        [1, 1, 0],
+        [0, 1, 1],
+    ],
+}
+COLORES = {
+    "I": (0, 255, 255),
+    "O": (255, 255, 0),
+    "T": (128, 0, 128),
+    "L": (255, 165, 0),
+    "J": (0, 0, 255),
+    "S": (0, 255, 0),
+    "Z": (255, 0, 0)
 }
 
-COLORES = {
-    "I": "cyan",
-    "O": "yellow",
-    "T": "purple",
-    "L": "orange",
-    "J": "blue",
-    "S": "green",
-    "Z": "red"
-}
 
 class Piezas:
     def __init__(self):
         self.tipo = random.choice(list(FORMAS))
         self.forma = FORMAS[self.tipo]
         self.color = COLORES[self.tipo]
-        self.pos = [0,4]
-
+        self.pos = [0, 4]
 
     def draw(self, tablero):
         for i in range(len(self.forma)):
@@ -112,7 +92,6 @@ class Piezas:
 
         return True
 
-
     def cai_posible(self, tablero):
 
         for i in range(len(self.forma)):
@@ -147,7 +126,6 @@ class Piezas:
 
         return posible
 
-
     def rotar(self, tablero):
         self.borrar(tablero)
 
@@ -158,19 +136,18 @@ class Piezas:
 
         self.draw(tablero)
 
-
     def rotar_derecha(self, matriz):
         return [
             list(fila)
             for fila in zip(*matriz[::-1])
         ]
 
-    def der_posible(self,tablero):
+    def der_posible(self, tablero):
         pos = self.pos
         for i in range(len(self.forma)):
             for j in range(len(self.forma[0])):
                 if self.forma[i][j] == 1:
-                    tablero[pos[0]+i][pos[1]+j] == "black"
+                    tablero[pos[0] + i][pos[1] + j] == "black"
 
         posible = True
 
@@ -178,8 +155,8 @@ class Piezas:
             for j in range(len(self.forma[0])):
                 if self.forma[i][j] == 1:
 
-                    fila = pos[0]+i
-                    columna = pos[1]+j+1
+                    fila = pos[0] + i
+                    columna = pos[1] + j + 1
 
                     if columna >= len(tablero[0]) or tablero[fila][columna] != "black":
                         posible = False
@@ -190,67 +167,54 @@ class Piezas:
         for i in range(len(self.forma)):
             for j in range(len(self.forma[0])):
                 if self.forma[i][j] == 1:
-                    tablero[pos[0+1]][pos[1]+j] == self.color
+                    tablero[pos[0 + 1]][pos[1] + j] == self.color
         return True
 
-    def izq_posible(self,tablero):
+    def izq_posible(self, tablero):
         pos = self.pos
-        for i in range(len(self.forma)):
-            for j in range(len(self.forma[0])):
-                if self.forma[i][j] == 1:
-                    tablero[pos[0]+i][pos[1]+j] == "black"
-    
-        posible = True
-    
-        for i in range(len(self.forma)):
-            for j in range(len(self.forma[0])):
-                if self.forma[i][j] == 1:
-    
-                    fila = pos[0]+i
-                    columna = pos[1]+j-1
-    
-                    if columna >= len(tablero[0]) or tablero[fila][columna] != "black":
-                        posible = False
-                        break
-    
-            if not posible: 
-                return False
-                
-    
-        for i in range(len(self.forma)):
-            for j in range(len(self.forma[0])):
-                if self.forma[i][j] == 1:
-                    tablero[pos[0+1]][pos[1]+j] == self.color
-        return True
+#        for i in range(len(self.forma)):
+#            for j in range(len(self.forma[0])):
+#               if self.forma[i][j] == 1:
+#                    tablero[pos[0] + i][pos[1] + j] == "black"
 
-    def derecha(self,tablero):
+        for i in range(len(self.forma)):
+            for j in range(len(self.forma[0])):
+                if self.forma[i][j] == 1:
+
+                    fila = pos[0] + i
+                    columna = pos[1] + j - 1
+
+                    if columna >= len(tablero[0]) or tablero[fila][columna] != "black":
+                        return False
+        return True
+    
+    def mov_posible(self, tablero):
+        for i in range(len(self.forma)):
+            for j in range(len(self.forma[0])):
+                if self.forma[i][j] == 1:
+
+                    fila = pos[0] + i
+                    columna = pos[1] + j - 1
+
+                    if columna >= len(tablero[0]) or tablero[fila][columna] != "black":
+                        return False
+        return True
+    
+    def derecha_posible(self):
+        
+
+
+    def mover(self, tablero, cambio_fila, cambio_columna):
+        self.borrar(tablero)
+        self.pos[0] += cambio_fila
+        self.pos[1] += cambio_columna
+        for i in range(len(self.forma)):
+            for j in range(len(self.forma[0])):
+                if self.forma[i][j] == 1:
+                    tablero[self.pos[0] + i][self.pos[1] + j] = self.color
+
+    def borrar(self, tablero):
         for i in range(len(self.forma)):
             for j in range(len(self.forma[0])):
                 if self.forma[i][j] == 1:
                     tablero[self.pos[0] + i][self.pos[1] + j] = "black"
-        
-        self.pos[1] += 1
-        
-        for i in range(len(self.forma)):
-            for j in range(len(self.forma[0])):
-                if self.forma[i][j] == 1:
-                    tablero[self.pos[0] + i][self.pos[1] + j] = self.color
-
-    def izquierda(self,tablero):
-        self.borrar(tablero)                
-        self.pos[1] += 1
-                
-        for i in range(len(self.forma)):
-            for j in range(len(self.forma[0])):
-                if self.forma[i][j] == 1:
-                    tablero[self.pos[0] + i][self.pos[1] + j] = self.color
-
-
-
-                        
-                    
-
-
-
-
-
