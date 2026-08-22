@@ -49,22 +49,27 @@ class Piezas:
         self.forma = FORMAS[self.tipo]
         self.color = COLORES[self.tipo]
         self.pos = [0, 4]
+        self.dibujada = False
 
     def draw(self, tablero):
         for i in range(len(self.forma)):
             for j in range(len(self.forma[0])):
                 if self.forma[i][j] == 1:
                     tablero[self.pos[0] + i][self.pos[1] + j] = self.color
+        self.dibujada = True
 
     def caida(self, tablero):
         self.borrar(tablero)
         self.pos[0] += 1
 
     def borrar(self, tablero):
+        if not self.dibujada:
+            return
         for i in range(len(self.forma)):
             for j in range(len(self.forma[0])):
                 if self.forma[i][j] == 1:
                     tablero[self.pos[0] + i][self.pos[1] + j] = "black"
+        self.dibujada = False
 
     def mover_posible(self, tablero, check_fila, check_columna):
         self.borrar(tablero)

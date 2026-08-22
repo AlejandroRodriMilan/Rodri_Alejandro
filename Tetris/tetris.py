@@ -30,20 +30,26 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        elif event.type == pygame.KEYDOWN and not game_over:
-            if event.key == pygame.K_UP and pieza:
-                pieza.rotar(tablero)
 
-            elif event.key == pygame.K_RIGHT and pieza.mover_posible(tablero, 0, 1) and pieza:
-                pieza.mover(tablero, 0, 1)
+        elif event.type == pygame.KEYDOWN:
+            if game_over:
+                if event.key == pygame.K_SPACE:
+                    Tablero.reset(tablero)
+                    game_over = False
+                    pieza_nueva = True
+                    fcount = 0
+                    linecount = 0
+                    speed = 30
+            else:
+                if event.key == pygame.K_UP and pieza:
+                    pieza.rotar(tablero)
+                elif event.key == pygame.K_RIGHT and pieza and pieza.mover_posible(tablero, 0, 1):
+                    pieza.mover(tablero, 0, 1)
+                elif event.key == pygame.K_LEFT and pieza and pieza.mover_posible(tablero, 0, -1):
+                    pieza.mover(tablero, 0, -1)
+                elif event.key == pygame.K_DOWN and pieza and pieza.mover_posible(tablero, 1, 0):
+                    pieza.mover(tablero, 1, 0)
 
-            elif event.key == pygame.K_LEFT and pieza.mover_posible(tablero, 0, -1) and pieza:
-                pieza.mover(tablero, 0, -1)
-
-            elif event.key == pygame.K_DOWN and pieza.mover_posible(tablero, 1, 0) and pieza:
-                pieza.mover(tablero, 1, 0)
-            elif event.key == pygame.K_r and possible_restart:
-                Tablero.reset(tablero)
 
 
     if not game_over:
@@ -51,7 +57,7 @@ while running:
             pieza = Piezas()
             pieza_nueva = False
             if not pieza.mover_posible(tablero, 0, 0):
-                running = False
+                game_over = True
 
         fcount += 1
 
@@ -65,12 +71,17 @@ while running:
                 fcount = 0
 
         if not pieza_nueva:
-            pieza.draw(tablero)   # <-- always redraw current state before rendering
-
+            pieza.draw(tablero)
+        
         Tablero.draw(tablero, screen)
 
 
-    
+    if game_over:
+        pygame.draw.rect(screen,(30,30,30),(50,300,300,200))
+        texto = font.render("GAME OVER", True, (255,0,0))
+        screen.blit(texto, (75, 350))
+        texto2 = small_font.render(f"Lines: {linecount}  Press SPACE", True, (200,200,200))
+        screen.blit(texto2, (75, 410))
 
     pygame.display.flip()
 
