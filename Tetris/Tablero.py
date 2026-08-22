@@ -27,7 +27,7 @@ def clear_line(tablero,speed,linecount):
             tablero.insert(0,["black"] * 10)
             linecount += 1 
             if linecount % 3 == 0:
-                speed = max(5,int(speed-1))
+                speed = max(5,int(speed-3))
         else: i-=1
 
     return speed,linecount

@@ -1,5 +1,4 @@
-import pygame
-import sys
+import pygame,sys
 import Tablero
 from piezas import Piezas
 
@@ -51,7 +50,7 @@ while running:
                     pieza.mover(tablero, 1, 0)
 
     if state == "home":
-        texto = font.render("Tetris", True, (255,0,0))
+        texto = font.render("TETRIS", True, (255,0,0))
         screen.blit(texto, (80, 350))
         texto2 = small_font.render("Press SPACE to Start",True,(100,100,100))
         screen.blit(texto2,(45,450))
