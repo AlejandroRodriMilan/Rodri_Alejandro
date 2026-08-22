@@ -19,13 +19,21 @@ def draw(tablero, screen):
             pygame.draw.rect(screen,tablero[fila][columna], cuadrado)
             pygame.draw.rect(screen,(30,30,30),cuadrado,1)  
 
-def clear_line(tablero):
-    for i in range(len(tablero)-1,-1,-1):
+def clear_line(tablero,speed,linecount):
+    i = len(tablero)-1
+    while i>= 0:
         if "black" not in tablero[i]:
             tablero.pop(i)
-            tablero.insert(0,["black"] *10)
+            tablero.insert(0,["black"] * 10)
+            speed = max(5,int(speed/1.5))
+            linecount += 1 
+
+        else: i-=1
+
+    return speed,linecount
 
 def reset(tablero):
     for i in range(len(tablero)):
         for j in range(len(tablero[0])):
             tablero[i][j] = "black"
+
