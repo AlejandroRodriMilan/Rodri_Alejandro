@@ -12,15 +12,15 @@ pygame.mixer.music.play(-1)
 screen = pygame.display.set_mode((400, 800))
 pygame.display.set_caption("Tetris")
 
-font = pygame.font.SysFont("consolas", 48)
-small_font = pygame.font.Font(None, 36)
+font = pygame.font.Font("Tetris/PressStart2P-Regular.ttf", 40)
+small_font = pygame.font.Font("Tetris/PressStart2P-Regular.ttf", 16)
 
 clock = pygame.time.Clock()
 fcount = 0
 tablero = Tablero.init()
 possible_restart = False
 
-game_over = False
+state = "home"
 
 speed = 30
 linecount = 0
@@ -32,15 +32,15 @@ while running:
             running = False
 
         elif event.type == pygame.KEYDOWN:
-            if game_over:
+            if state == "over" or state == "home":
                 if event.key == pygame.K_SPACE:
                     Tablero.reset(tablero)
-                    game_over = False
+                    state = "game"
                     pieza_nueva = True
                     fcount = 0
                     linecount = 0
                     speed = 30
-            else:
+            elif state == "game":
                 if event.key == pygame.K_UP and pieza:
                     pieza.rotar(tablero)
                 elif event.key == pygame.K_RIGHT and pieza and pieza.mover_posible(tablero, 0, 1):
@@ -50,14 +50,19 @@ while running:
                 elif event.key == pygame.K_DOWN and pieza and pieza.mover_posible(tablero, 1, 0):
                     pieza.mover(tablero, 1, 0)
 
+    if state == "home":
+        texto = font.render("Tetris", True, (255,0,0))
+        screen.blit(texto, (80, 350))
+        texto2 = small_font.render("Press SPACE to Start",True,(100,100,100))
+        screen.blit(texto2,(45,450))
 
 
-    if not game_over:
+    if state == "game":
         if pieza_nueva:
             pieza = Piezas()
             pieza_nueva = False
             if not pieza.mover_posible(tablero, 0, 0):
-                game_over = True
+                state = "over"
 
         fcount += 1
 
@@ -76,12 +81,15 @@ while running:
         Tablero.draw(tablero, screen)
 
 
-    if game_over:
-        pygame.draw.rect(screen,(30,30,30),(50,300,300,200))
+    if state == "over":
+        pygame.draw.rect(screen,(30,30,30),(10,300,380,200))
         texto = font.render("GAME OVER", True, (255,0,0))
-        screen.blit(texto, (75, 350))
-        texto2 = small_font.render(f"Lines: {linecount}  Press SPACE", True, (200,200,200))
-        screen.blit(texto2, (75, 410))
+        screen.blit(texto, (25, 350))
+        texto2 = small_font.render(f"Lines: {linecount}", True, (200,200,200))
+        screen.blit(texto2, (30, 410))
+        texto3 = small_font.render(f"Press SPACE", True, (200,200,200))
+        screen.blit(texto3, (100, 450))
+
 
     pygame.display.flip()
 
